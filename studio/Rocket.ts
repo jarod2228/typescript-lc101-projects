@@ -1,9 +1,3 @@
-// Instructions are published in the online book. The URL is:
-// https://education.launchcode.org/intro-to-professional-web-dev/chapters/typescript/studio.html
-
-// TODO: 
-// * Code the Astronaut, Cargo, and Rocket classes in new files.
-// * Import the three classes into this file.
 import { Astronaut } from './Astronaut';
 import { Cargo } from './Cargo';
 import { Payload } from './Payload';
@@ -23,17 +17,17 @@ export class Rocket {
         for(let i = 0; i < items.length; i++) {
             sum += items[i].massKg;
         }
-        }
         return sum;
+        }
     }
     currentMassKg(): number {
-        let totalMass: number = this.sumMass.(this.astronauts) + this.sumMass(this.cargoItems);
-        return totalMass;
+        return this.sumMass(this.cargoItems) + this.sumMass(this.astronauts);
     }
     canAdd(item: Payload): boolean {
         return this.currentMassKg() + item.massKg <= this.totalCapacityKg;
     }
     addCargo(cargo: Cargo): boolean {
+        // this.canAdd(astronaut) ? this.astronauts.push(astronaut) : false;
         if(this.canAdd(cargo)) {
             this.cargoItems.push(cargo);
             return true;
