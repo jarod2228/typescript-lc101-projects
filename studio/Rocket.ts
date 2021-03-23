@@ -19,7 +19,6 @@ export class Rocket {
         }
         return sum;
         }
-    }
     currentMassKg(): number {
         return this.sumMass(this.cargoItems) + this.sumMass(this.astronauts);
     }

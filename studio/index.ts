@@ -1,52 +1,43 @@
-// Instructions are published in the online book. The URL is:
-// https://education.launchcode.org/intro-to-professional-web-dev/chapters/typescript/studio.html
-
-// TODO: 
-// * Code the Astronaut, Cargo, and Rocket classes in new files.
-// * Import the three classes into this file.
 import { Astronaut } from './Astronaut';
 import { Cargo } from './Cargo';
-import { Payload } from './Payload';
-export class Rocket {
-    name: string;
-    totalCapacityKg: number;
-    cargoItems: Cargo[] = [];
-    astronauts: Astronaut[] = [];
+import { Rocket } from './Rocket';
 
-    constructor (name: string, totalCapacityKg: number) {
-        this.name = name;
-        this.totalCapacityKg = totalCapacityKg;
-    }
+let falcon9: Rocket = new Rocket('Falcon 9', 7500);
 
-    sumMass(items: Payload[]): number {
-        let sum: number = 0;
-        for(let i = 0; i < items.length; i++) {
-            sum += items[i].massKg;
-        }
-        }
-        return sum;
-    }
-    currentMassKg(): number {
-        let totalMass: number = this.sumMass.(this.astronauts) + this.sumMass(this.cargoItems);
-        return totalMass;
-    }
-    canAdd(item: Payload): boolean {
-        return this.currentMassKg() + item.massKg <= this.totalCapacityKg;
-    }
-    addCargo(cargo: Cargo): boolean {
-        if(this.canAdd(cargo)) {
-            this.cargoItems.push(cargo);
-            return true;
-        } else {
-            return false;
-        }
-    }
-    addAstronaut(astronaut: Astronaut): boolean {
-        if (this.canAdd(astronaut)) {
-            this.astronauts.push(astronaut);
-            return true;
-        } else {
-            return false;
-        }
-    }
+let astronauts: Astronaut[] = [
+   new Astronaut(75, 'Mae'),
+   new Astronaut(81, 'Sally'),
+   new Astronaut(99, 'Charles')
+];
+
+for (let i = 0; i < astronauts.length; i++) {
+   let astronaut = astronauts[i];
+   let status = '';
+   if (falcon9.addAstronaut(astronaut)) {
+      status = "On board";
+   } else {
+      status = "Not on board";
+   }
+   console.log(`${astronaut.name}: ${status}`);
 }
+
+let cargo: Cargo[] = [
+   new Cargo(3107.39, "Satellite"),
+   new Cargo(1000.39, "Space Probe"),
+   new Cargo(753, "Water"),
+   new Cargo(541, "Food"),
+   new Cargo(2107.39, "Tesla Roadster"),
+];
+
+for (let i = 0; i < cargo.length; i++) {
+   let c = cargo[i];
+   let loaded = '';
+   if (falcon9.addCargo(c)) {
+      loaded = "Loaded"
+   } else {
+      loaded = "Not loaded"
+   }
+   console.log(`${c.material}: ${loaded}`);
+}
+
+console.log(`Final cargo and astronaut mass: ${falcon9.currentMassKg()} kg.`);
